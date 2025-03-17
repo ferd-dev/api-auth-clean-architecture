@@ -1,0 +1,12 @@
+# Node.js
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Output directories
+dist/
+
+# IDEs and editors
+.vscode/
