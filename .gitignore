@@ -10,3 +10,6 @@ dist/
 
 # IDEs and editors
 .vscode/
+
+# env
+.env

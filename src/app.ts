@@ -1,9 +1,11 @@
-import { Server } from "./presentation/server";
-
-(() => {
-  main();
-})();
+import { envs } from './config'
+import { Server } from './presentation/server'
+;(() => {
+  main()
+})()
 
 async function main() {
-  new Server().start();
+  new Server({
+    port: envs.PORT,
+  }).start()
 }
