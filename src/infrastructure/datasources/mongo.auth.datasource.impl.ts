@@ -1,3 +1,4 @@
+import { UserModel } from '../../data/mongodb'
 import {
   AuthDatasource,
   CustomError,
@@ -10,12 +11,23 @@ export class MongoAuthDatasourceImpl implements AuthDatasource {
     const { name, email, password } = registerUserDto
 
     try {
-      return new User(
-        '1',
+      const emailExists = await UserModel.findOne({ email })
+      if (emailExists) throw CustomError.badRequest('Email already exists')
+
+      const user = new UserModel({
         name,
         email,
         password,
-        ['user'],
+      })
+
+      await user.save()
+
+      return new User(
+        user.id,
+        name,
+        email,
+        password,
+        user.roles,
         'https://example.com/user.jpg'
       )
     } catch (error) {
